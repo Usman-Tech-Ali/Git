@@ -10,35 +10,42 @@ const CreatePost = () => {
   const postBodyElement = useRef();
   const reactionsElement = useRef();
   const tagsElement = useRef();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = userIdElement.current.value;
     const postTitle = postTitleElement.current.value;
     const postBody = postBodyElement.current.value;
-    const reactions = reactionsElement.current.value;
+    const reactionsInput = reactionsElement.current.value; // Assuming input like "5 likes 3 dislikes"
     const tags = tagsElement.current.value.split(" ");
+
+    // Parse reactions input
+    const reactionsParts = reactionsInput.split(" "); // ["5", "likes", "3", "dislikes"]
+    const reactions = {
+      likes: parseInt(reactionsParts[0], 10),
+      dislikes: parseInt(reactionsParts[2], 10),
+    };
 
     if (
       userId !== "" &&
       postTitle !== "" &&
       postBody !== "" &&
-      reactions !== "" &&
-      tags !== ""
+      reactionsInput !== "" && // Ensure reactions input is not empty
+      tags.length > 0 // Ensure there's at least one tag
     ) {
-      alert(`Post created sucessfully`);
+      alert(`Post created successfully`);
+
+      // Reset form fields
+      userIdElement.current.value = "";
+      postTitleElement.current.value = "";
+      postBodyElement.current.value = "";
+      reactionsElement.current.value = "";
+      tagsElement.current.value = "";
+
+      // Call addPost with all necessary parameters
+      addPost(userId, postTitle, postBody, reactions, tags);
     } else {
       alert("Please fill all the fields");
-      return;
     }
-
-    userIdElement.current.value = "";
-    postTitleElement.current.value = "";
-    postBodyElement.current.value = "";
-    reactionsElement.current.value = "";
-    tagsElement.current.value = "";
-
-    addPost(userId, postTitle, postBody, reactions, tags);
   };
 
   return (
@@ -92,7 +99,7 @@ const CreatePost = () => {
           ref={reactionsElement}
           className="form-control"
           id="reactions"
-          placeholder="How many people reacted to this post ..."
+          placeholder="5 likes and 10 dislikes ..."
         />
       </div>
 

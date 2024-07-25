@@ -23,8 +23,10 @@ const Post = ({ post }) => {
             {tag}
           </span>
         ))}
+        {/* Fixed: Displaying likes and dislikes from the reactions object */}
         <div className="alert alert-success reactions" role="alert">
-          Post reacted by {post.reactions} people
+          Post reacted by {post.reactions.likes} likes and{" "}
+          {post.reactions.dislikes} dislikes
         </div>
       </div>
     </div>

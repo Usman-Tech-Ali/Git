@@ -32,3 +32,11 @@
 .delete-btn {
   cursor: pointer;
 }
+
+.welcome-msg {
+  margin: 70px 0;
+}
+
+.spinner {
+  margin: 50px auto;
+}
