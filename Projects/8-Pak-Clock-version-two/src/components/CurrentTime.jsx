@@ -1,9 +1,24 @@
+import { useEffect } from "react";
+import { useState } from "react";
+
 function CurrentTime() {
-  let s = new Date();
+  const [time, settime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      settime(new Date());
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
-    <p className="lead">
-      This is the currrent time: ${s.toLocaleDateString()} -{" "}
-      {s.toLocaleTimeString()}
+    <p
+      className="lead"
+      style={{ fontSize: "1.75rem", color: "black", fontWeight: "bold" }}>
+      {time.toLocaleDateString()} - {time.toLocaleTimeString()}
     </p>
   );
 }

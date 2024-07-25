@@ -1,5 +1,14 @@
-function ClcokHeading() {
-  return <h1 className="fw-bolder">Pak Clock</h1>;
+import { IoMdClock } from "react-icons/io";
+
+function ClockHeading() {
+  return (
+    <div className="heading">
+      <h1 style={{ color: "black", fontSize: "3.5rem" }} className="fw-bolder">
+        Pak Clock
+      </h1>
+      <IoMdClock style={{ fontSize: "100px" }} />
+    </div>
+  );
 }
 
-export default ClcokHeading;
+export default ClockHeading;
