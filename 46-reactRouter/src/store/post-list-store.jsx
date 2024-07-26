@@ -9,7 +9,6 @@ import {
 
 export const PostList = createContext({
   postList: [],
-  fetching: false,
   addPost: () => {},
   deletePost: () => {},
 });
@@ -58,27 +57,6 @@ const PostListProvider = ({ children }) => {
     });
   };
 
-  const [fetching, setFetching] = useState(false);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    setFetching(true);
-    fetch("https://dummyjson.com/posts", { signal })
-      .then((res) => res.json())
-      .then((data) => {
-        addInitialPost(data.posts);
-        // addInitialPost([]); if it is empty then it shows welcome-msg
-        setFetching(false);
-      });
-
-    return () => {
-      console.log("Component vanishes");
-      controller.abort;
-    };
-  }, []);
-
   // Using useCall back hook, now it depends on displatPostList and never do un-necessary re-painting
 
   /* const deletePost = useCallback(
@@ -103,7 +81,6 @@ const PostListProvider = ({ children }) => {
     <PostList.Provider
       value={{
         postList,
-        fetching,
         addPost,
         deletePost,
       }}>
