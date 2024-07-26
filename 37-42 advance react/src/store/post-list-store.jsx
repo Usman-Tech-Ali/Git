@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useCallback, useMemo, useReducer } from "react";
 
 export const PostList = createContext({
   postList: [],
@@ -55,6 +55,27 @@ const PostListProvider = ({ children }) => {
       },
     });
   };
+
+  // Using useCall back hook, now it depends on displatPostList and never do un-necessary re-painting
+
+  /* const deletePost = useCallback(
+    (postId) => {
+      dispatchpostList({
+        type: "DELETE_POST",
+        payload: {
+          postId,
+        },
+      });
+    },
+    [dispatchpostList]
+  );*/
+
+  
+  // useMemo Hook
+  /*const arr = [5, 3, 7, 1, 9];
+  const sortedArr = arr.sort(); // but problem is that it do calculation every time when the component repaints
+
+  const sortArr = useMemo(() => arr.sort(), [arr]); // now it do calculation only when arr changes not in every paint cycle*/
 
   return (
     <PostList.Provider
