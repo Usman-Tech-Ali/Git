@@ -6,4 +6,4 @@ The goal is to build a solid understanding of React.js concepts and best practic
 
 # Contribute
 
-If you have any suggestions or feedback, please feel free to open an issue or submit a pull request
+If you have any suggestions or feedback, please feel free to open an issue or submit a pull request.
